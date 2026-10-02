@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<title>Relatório Mensal Instagram, Grupo ROB</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #faf6f0; --surface: #ffffff; --surface-2: #f3ebe0; --border: #e4d8c8;
+    --text: #2a221a; --text-dim: #6b5c4c;
+    --rob: #1e2a4a; --rob-soft: #e7eaf3;
+    --ok: #3f7a52; --ok-soft: #e8f3ea;
+    --info: #3e5c8a; --info-soft: #e7eef6;
+    --shadow: 0 1px 2px rgba(42,34,26,0.06), 0 8px 24px -12px rgba(42,34,26,0.18);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: "Work Sans", -apple-system, "Segoe UI", sans-serif; line-height: 1.55; }
+  .page { max-width: 920px; margin: 0 auto; padding: 48px 24px 96px; }
+  .eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--text-dim); margin: 0 0 10px; }
+  h1 { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: clamp(28px, 4.6vw, 38px); line-height: 1.1; letter-spacing: -0.01em; margin: 0 0 12px; }
+  .doc-sub { font-size: 15.5px; color: var(--text-dim); max-width: 64ch; margin: 0 0 18px; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+  .meta-chip { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; padding: 5px 11px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-dim); }
+  section { margin-top: 44px; padding-top: 32px; border-top: 1px solid var(--border); }
+  h2 { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 23px; margin: 0 0 6px; }
+  .sec-note { font-size: 14px; color: var(--text-dim); margin: 0 0 20px; max-width: 68ch; }
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); padding: 18px 20px; }
+  .stat .k { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-dim); margin: 0 0 6px; }
+  .stat .v { font-family: "Fraunces", Georgia, serif; font-size: 30px; font-weight: 600; color: var(--rob); margin: 0 0 6px; }
+  .stat .d { font-size: 12.5px; color: var(--ok); margin: 0; }
+  .two-col { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (min-width: 640px) { .two-col { grid-template-columns: 1fr 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--rob); border-radius: 12px; box-shadow: var(--shadow); padding: 18px 20px; }
+  .card.ok { border-left-color: var(--ok); }
+  .card.info { border-left-color: var(--info); }
+  .card h3 { font-family: "Fraunces", Georgia, serif; font-size: 16.5px; margin: 0 0 8px; }
+  .card p { font-size: 14px; color: var(--text-dim); margin: 0; }
+  .toplist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .toplist li { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; padding: 11px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; box-shadow: var(--shadow); }
+  .toplist .tt { color: var(--text); }
+  .toplist .vv { font-family: "IBM Plex Mono", monospace; font-weight: 600; color: var(--rob); white-space: nowrap; }
+  .bars { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+  .bar-row { display: flex; align-items: center; gap: 10px; font-size: 13.5px; }
+  .bar-label { width: 90px; flex: none; color: var(--text-dim); }
+  .bar-track { flex: 1; height: 10px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--rob); border-radius: 999px; }
+  .bar-val { width: 44px; text-align: right; font-family: "IBM Plex Mono", monospace; color: var(--text); }
+  .pill-row { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 14px; font-size: 13.5px; color: var(--text-dim); }
+  .pill-row b { color: var(--text); font-family: "IBM Plex Mono", monospace; }
+  .achv { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--ok); border-radius: 12px; box-shadow: var(--shadow); padding: 18px 20px; }
+  .achv h3 { font-family: "Fraunces", Georgia, serif; font-size: 16.5px; margin: 0 0 10px; }
+  .achv ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+  .achv li { font-size: 14px; color: var(--text-dim); }
+  .achv li b { color: var(--text); }
+  .inandamento { background: var(--info-soft); border: 1px solid var(--info); border-radius: 12px; padding: 16px 20px; margin-bottom: 16px; }
+  .inandamento .tag { font-family: "IBM Plex Mono", monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--info); font-weight: 600; }
+  .inandamento h3 { font-family: "Fraunces", Georgia, serif; font-size: 16px; margin: 6px 0 8px; }
+  .inandamento p { font-size: 14px; color: var(--text-dim); margin: 0; }
+  .three-col { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 14px; }
+  @media (min-width: 720px) { .three-col { grid-template-columns: repeat(3,1fr); } }
+  .num-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); padding: 16px 18px; }
+  .num-card .n { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 999px; background: var(--rob); color: #fff; font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+  .num-card h4 { font-family: "Fraunces", Georgia, serif; font-size: 15px; margin: 0 0 6px; }
+  .num-card p { font-size: 13.5px; color: var(--text-dim); margin: 0; }
+  footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border); font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--text-dim); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  @media (max-width: 560px) { .page { padding: 32px 16px 72px; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <p class="eyebrow">Grupo ROB Food · Instagram</p>
+    <h1>Relatório Mensal de Conteúdo para Instagram</h1>
+    <p class="doc-sub">Consolidado de expansão, franquias e métricas. Setembro/2026, últimos 30 dias.</p>
+    <div class="meta-row">
+      <span class="meta-chip">Setembro 2026</span>
+      <span class="meta-chip">30 dias</span>
+      <span class="meta-chip">Instagram Insights</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>📊 Visão geral de resultados</h2>
+    <div class="stat-grid">
+      <div class="stat"><div class="k">Visualizações totais</div><div class="v">196.902</div><div class="d">Alcance segmentado B2B / B2C</div></div>
+      <div class="stat"><div class="k">Visualizadores</div><div class="v">102.029</div><div class="d">Pessoas alcançadas unicamente</div></div>
+      <div class="stat"><div class="k">Seguidores líquidos</div><div class="v">+47</div><div class="d">Expansão qualificada da base</div></div>
+      <div class="stat"><div class="k">Interações totais</div><div class="v">995</div><div class="d">Curtidas, comentários, compartilhamentos e salvamentos</div></div>
+      <div class="stat"><div class="k">Visitas ao perfil</div><div class="v">1.202</div><div class="d">Interesse de novos franqueados</div></div>
+      <div class="stat"><div class="k">Toques no link da bio</div><div class="v">8</div><div class="d">Conversão para expansão</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>📈 Performance por formato de conteúdo</h2>
+    <div class="two-col">
+      <div class="card ok">
+        <h3>Reels como motor principal (12 mil)</h3>
+        <p>Os vídeos de expansão e de novas unidades lideraram as visualizações e o engajamento com potenciais investidores e com o público local.</p>
+      </div>
+      <div class="card info">
+        <h3>Sustentação nos Stories (4,8 mil)</h3>
+        <p>Acompanhamento diário dos bastidores de reuniões e aberturas, mantendo parceiros e público engajados.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>🏆 Principais resultados do perfil</h2>
+    <p class="sec-note">Conteúdos mais relevantes por visualizações, interações por formato e atividade do perfil, Instagram Insights.</p>
+    <ul class="toplist">
+      <li><span class="tt">Piratininga, tem Øliver's Piz...</span><span class="vv">971</span></li>
+      <li><span class="tt">Tem mais uma franquia a...</span><span class="vv">937</span></li>
+      <li><span class="tt">Você não vai acreditar no que o n...</span><span class="vv">739</span></li>
+      <li><span class="tt">Dia de reunião com nova fran...</span><span class="vv">377</span></li>
+      <li><span class="tt">Você não precisa escolher...</span><span class="vv">359</span></li>
+      <li><span class="tt">Porque cada nova unidade começa...</span><span class="vv">335</span></li>
+      <li><span class="tt">Já preparando tudo pra essa nova f...</span><span class="vv">301</span></li>
+    </ul>
+
+    <div class="bars">
+      <div class="bar-row"><span class="bar-label">Reels</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">227</span></div>
+      <div class="bar-row"><span class="bar-label">Stories</span><div class="bar-track"><div class="bar-fill" style="width:37%"></div></div><span class="bar-val">83</span></div>
+      <div class="bar-row"><span class="bar-label">Posts</span><div class="bar-track"><div class="bar-fill" style="width:15%"></div></div><span class="bar-val">35</span></div>
+      <div class="bar-row"><span class="bar-label">Vídeos ao vivo</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="bar-val">0</span></div>
+    </div>
+    <div class="pill-row">
+      <span>Visitas ao perfil: <b>1.098</b></span>
+      <span>Toques no link da bio: <b>8</b></span>
+    </div>
+  </section>
+
+  <section>
+    <h2>🔬 Metodologia e engenharia de conteúdo</h2>
+    <p class="sec-note">A estratégia equilibra a atração corporativa de novos franqueados com o apetite do consumidor final pelas marcas do grupo.</p>
+    <div class="two-col" style="margin-bottom:14px;">
+      <div class="card"><h3>1. Anúncios de expansão (B2B)</h3><p>Marcos de novas unidades estruturados para demonstrar solidez, lucratividade e expansão acelerada no mercado.</p></div>
+      <div class="card"><h3>2. Bastidores e reuniões</h3><p>Humanização dos processos corporativos, mostrando o suporte dedicado aos franqueados e o dia a dia da gestão.</p></div>
+    </div>
+    <div class="two-col">
+      <div class="card"><h3>3. Produtos de alta qualidade (food porn)</h3><p>Close-ups de pratos e combos que despertam desejo imediato e fortalecem o posicionamento das marcas do grupo.</p></div>
+      <div class="card"><h3>4. Consistência nos Stories</h3><p>Acompanhamento diário para manter o ecossistema de negócios conectado e transparente.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>🎯 Conquistas de marca</h2>
+    <p class="sec-note">Setembro consolidou o Grupo ROB como uma holding de referência em expansão e gestão gastronômica na região.</p>
+    <div class="two-col">
+      <div class="achv">
+        <h3>Consolidação institucional e franquias</h3>
+        <ul>
+          <li><b>Autoridade em negócios:</b> a transparência nas reuniões e aberturas gerou confiança em potenciais investidores.</li>
+          <li><b>Visibilidade de marca:</b> mais de 196 mil visualizações orgânicas fortalecendo o reconhecimento corporativo do grupo.</li>
+          <li><b>Crescimento qualificado:</b> atração de leads e seguidores focados no mercado de franquias e gastronomia.</li>
+        </ul>
+      </div>
+      <div class="achv">
+        <h3>Comunidade engajada</h3>
+        <ul>
+          <li>Interações sólidas em conteúdos de bastidores, provando que o público valoriza conhecer quem está por trás das marcas.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>🚀 Próximos passos</h2>
+    <div class="inandamento">
+      <span class="tag">✓ Em andamento</span>
+      <h3>Novos criativos para a campanha de franquias</h3>
+      <p>Já estamos trabalhando em novos criativos alinhados à comunicação e à abordagem para franqueados. Estamos renovando as peças de topo, meio e fundo de funil, tanto em vídeo quanto em estáticos, para abastecer a campanha.</p>
+    </div>
+    <div class="three-col">
+      <div class="num-card"><div class="n">1</div><h4>Expansão e collabs</h4><p>Ampliar anúncios de novas unidades e parcerias estratégicas para atrair novos franqueados.</p></div>
+      <div class="num-card"><div class="n">2</div><h4>Carrosséis informativos</h4><p>Investir em mais carrosséis detalhando o modelo de negócio das franquias.</p></div>
+      <div class="num-card"><div class="n">3</div><h4>Trends e bastidores</h4><p>Aliar tendências do Instagram ao dia a dia corporativo e ao suporte às unidades do Grupo ROB.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Grupo ROB Food · Relatório de Conteúdo para Instagram</span>
+    <span>Setembro/2026</span>
+  </footer>
+</div>
+</body>
+</html>
